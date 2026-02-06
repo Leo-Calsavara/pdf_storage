@@ -12,7 +12,7 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./backend/infra/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backend/src/config/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   minio:
     image: minio/minio
