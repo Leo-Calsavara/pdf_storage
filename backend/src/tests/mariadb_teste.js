@@ -1,4 +1,4 @@
-import { db } from '../infra/mariadb.js';
+import { db } from '../config/mariadb.js';
 
 
 async function seed() {

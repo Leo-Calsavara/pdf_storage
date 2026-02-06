@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 
 const db = await mysql.createPool({
-  host: 'localhost',     // se Node roda fora do Docker
+  host: 'localhost',
   user: 'fullstack_user',
   password: 'fullstack_pass',
   database: 'app_db',

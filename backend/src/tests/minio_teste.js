@@ -1,4 +1,4 @@
-import { minioClient } from "../infra/minio.js";
+import { minioClient } from "../config/minio.js";
 import fs from 'fs';
 
 async function testeUpload() {
