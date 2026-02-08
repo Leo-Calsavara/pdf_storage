@@ -1,5 +1,5 @@
 import express from 'express';
-import {router} from './src/router/auth.js';
+import {router} from './src/router/auth_rout.js';
 
 
 const app = express();

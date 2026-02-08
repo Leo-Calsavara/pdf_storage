@@ -3,22 +3,16 @@ import {minioClient} from '../config/minio.js';
 import fs from 'fs';
 
 class PDFRepository {
-    static async create({user_id, user_name, file_name, file_url}) { 
-            const stats = await fs.stat(file_url);
-            const file_size = stats.size;
-        
+    static async create(user, file) { 
+            const bucketName = `${user.id}-${user.name.toLowerCase().trim().replace(/\s+/g, '')}`;
+
             const [result] = await db.query(
-                'INSERT INTO pdf_files (user_id, pdf_name, pdf_size) VALUES (?, ?, ?)',
-                [user_id, file_name, file_size]
+            'INSERT INTO pdf_files (user_id, pdf_name, pdf_size) VALUES (?, ?, ?)',
+            [user.id, file.originalname, file.size]
             );
 
-            try {
-                const bucketName = `${user_id}-${user_name.toLowerCase().trim().replace(/\s+/g, '')}`;
-                await minioClient.fPutObject(bucketName, file_name, `${file_url}`);
-                
-            } catch (error) {
-                console.log('Erro no upload:', error);
-            }
+            console.log('nome bucket', bucketName);
+            await minioClient.fPutObject(bucketName, file.originalname, file.path);
         
             return result.insertId;
         }
