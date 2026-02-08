@@ -14,7 +14,10 @@ const Login = () => {
         event.preventDefault();
         try {
                 const data = await loginUser({ email, password })
-                alert(`Token: ${data.token}`)
+                if(data.token) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = '/dashboard';
+                }
             } catch (err) {
                 alert(err)
             }
