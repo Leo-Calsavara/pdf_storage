@@ -1,11 +1,23 @@
-import {Client} from 'minio';
+/*import { Client } from 'minio';
 
 const minioClient = new Client({
-    endPoint: 'localhost',
-    port: 9000,
-    useSSL: false,
-    accessKey: 'minioadmin',
-    secretKey: 'minioadmin',
+  endPoint: process.env.MINIO_ENDPOINT,
+  port: Number(process.env.MINIO_PORT),
+  useSSL: process.env.MINIO_USE_SSL === 'true',
+  accessKey: process.env.MINIO_ACCESS_KEY,
+  secretKey: process.env.MINIO_SECRET_KEY,
 });
 
+export { minioClient };*/
+
+import {Client} from 'minio'; 
+
+const minioClient = new Client({ 
+    endPoint: 'localhost', 
+    port: 9000, 
+    useSSL: false, 
+    accessKey: 'minioadmin', 
+    secretKey: 'minioadmin', 
+}); 
+    
 export {minioClient};

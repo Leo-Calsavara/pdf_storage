@@ -9,9 +9,8 @@ CREATE TABLE users (
 CREATE TABLE pdf_files (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  original_name VARCHAR(255) NOT NULL,
-  minio_path VARCHAR(500) NOT NULL UNIQUE,
-  size int NOT NULL,
+  pdf_name VARCHAR(255) NOT NULL,
+  pdf_size int NOT NULL,
   uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   INDEX idx_user_id (user_id)
