@@ -33,8 +33,10 @@ const Login = () => {
 
     return (
         <div className="login">
-            <form className="loginForm" onSubmit={handle_submit}>
-                <h2>Login do sistema</h2>
+            <form className="login_form" onSubmit={handle_submit}>
+                <div className='titulo'>
+                    <h1>Login do sistema</h1>
+                </div>
                 <div className='input-field'>
                     <input type="email" placeholder="E-mail" onChange={handle_email_change}/>
                     <FaEnvelope className="icon"/> 

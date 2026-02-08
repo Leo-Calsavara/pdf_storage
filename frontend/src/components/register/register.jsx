@@ -37,8 +37,10 @@ const Register = () => {
 
     return (
         <div className="register">
-            <form className="registerForm" onSubmit={handle_submit}>
-                <h2>Cadastro no sistema</h2>
+            <form className="register_form" onSubmit={handle_submit}>
+                <div className='titulo'>
+                    <h1>Cadastro no sistema</h1>    
+                </div>
                 <div className='input-field'>
                     <input type="text" placeholder="Nome" onChange={handle_name_change}/>
                     <FaUser className="icon"/> 
