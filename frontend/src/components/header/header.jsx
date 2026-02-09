@@ -14,7 +14,7 @@ const Header = () => {
         <header className="header">
             <div className="header_container">
                 <div className="header_logo">
-                    <Link to="/">PDF Manager</Link>
+                    <Link to="/dashboard">PDF Manager</Link>
                 </div>
                 <nav className="header_nav">
                     <Link to="/dashboard/upload" className="nav_link">Upload de PDF</Link>

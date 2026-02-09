@@ -14,3 +14,17 @@ export async function uploadPDF(formData, token) {
     }
     
 }
+
+export async function getPDFs(token) {
+    try {
+        const response = await fetch(`${URL}/list_pdfs`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        alert("Erro ao buscar PDFs: " + error.message);
+    }
+}

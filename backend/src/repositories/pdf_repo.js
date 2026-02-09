@@ -17,13 +17,21 @@ class PDFRepository {
             return result.insertId;
         }
 
-    static async find_pdf(user_id, file_name) {
+    static async valida_pdf(user_id, file_name) {
         const [exist] = await db.query(
             'SELECT * FROM pdf_files WHERE user_id = ? AND pdf_name = ?',
             [user_id, file_name]
         );
         return exist;
     
+    }
+
+    static async list_pdfs(user_id) {
+        const [pdfs] = await db.query(
+            'SELECT * FROM pdf_files WHERE user_id = ?',
+            [user_id]
+        );
+        return {pdfs};
     }
 }
 

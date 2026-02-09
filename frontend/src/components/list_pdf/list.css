@@ -1,0 +1,31 @@
+.pdf-table {
+  width: 95%;
+  margin: 0 auto;
+  color: white;
+  font-family: Monospace;
+}
+
+.pdf-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.5fr;
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.pdf-header {
+  font-weight: bold;
+  border-bottom: 2px solid #888;
+}
+
+.pdf-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list_container {
+  width: 95%;
+  height: 90%;
+  margin-top: 60px;  
+  background-color: #222;
+}

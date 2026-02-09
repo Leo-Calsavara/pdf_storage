@@ -12,3 +12,13 @@ export async function uploadPDF(req, res) {
         return res.status(err.status || 500).json({ error: err.message });
   }
 }
+
+export async function listPDFs(req, res) {
+    try {
+        const user = req.user;
+        const pdfs = await PDFService.listPDFs(user.id);
+        return res.status(200).json(pdfs);
+    } catch (err) {
+        return res.status(err.status || 500).json({ error: err.message });
+    }
+}

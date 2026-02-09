@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 class PDFService {
     static async uploadPDF({ user, file }) {
 
-    const exist_pdf = await PDFRepository.find_pdf(user.id, file.originalname);
+    const exist_pdf = await PDFRepository.valida_pdf(user.id, file.originalname);
 
         if(exist_pdf.length > 0) {
             const err = new Error('Arquivo já existe');
@@ -15,6 +15,11 @@ class PDFService {
         const pdf = await PDFRepository.create(user, file);
 
         return {pdf};
+    }
+
+    static async listPDFs(user_id) {
+        const pdfs = await PDFRepository.list_pdfs(user_id);
+        return pdfs;
     }
 }
 

@@ -1,7 +1,7 @@
 import { use, useState } from "react";
 import './upload.css'
 import Header from '../header/header.jsx'
-import { uploadPDF } from '../../services/upload_api.js';
+import { uploadPDF } from '../../services/pdf_api.js';
 import { useNavigate } from "react-router-dom";
 
 const Upload = () => {
