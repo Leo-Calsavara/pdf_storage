@@ -13,7 +13,6 @@ CREATE TABLE pdf_files (
   pdf_size int NOT NULL,
   uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-  INDEX idx_user_id (user_id)
 );
 
 CREATE TABLE tags (
@@ -27,5 +26,4 @@ CREATE TABLE pdf_tags (
   PRIMARY KEY (pdf_id, tag_id),
   FOREIGN KEY (pdf_id) REFERENCES pdf_files(id) ON DELETE CASCADE,
   FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE,
-  INDEX idx_tag_id (tag_id)
 );

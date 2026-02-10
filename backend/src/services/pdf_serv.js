@@ -21,6 +21,16 @@ class PDFService {
         const pdfs = await PDFRepository.list_pdfs(user_id);
         return pdfs;
     }
+
+    static async linkPDFTag(pdf_id, tag_id) {
+        const result = await PDFRepository.link_pdf_tag(pdf_id, tag_id);
+        return result;
+    }
+
+    static async getPDFTags(pdf_id) {
+        const tags = await PDFRepository.get_pdf_tags(pdf_id);
+        return tags;
+    }
 }
 
 export default PDFService;
