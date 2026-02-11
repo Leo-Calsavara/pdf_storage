@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./list.css";
 import Header from "../header/header";
-import { getPDFs, getTagsPdf } from "../../services/pdf_api.js";
+import { getPDFs, getTagsPdf, downloadPDF } from "../../services/pdf_api.js";
 
 const List = () => {
   const [pdfList, setPdfList] = useState([]);
@@ -21,25 +21,7 @@ const List = () => {
     return `${day}/${month}/${year}`;
   };
 
-  async function downloadPDF(pdfId) {
-    const token = localStorage.getItem("token");
-
-    const res = await fetch(`http://localhost:3000/api/pdf/download?pdfId=${pdfId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-
-    const blob = await res.blob();
-    const url = window.URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "arquivo.pdf";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  }
+  
 
   useEffect(() => {
     const fetchPDFs = async () => {
@@ -91,7 +73,7 @@ const List = () => {
           </span>
           <span>{formatSizeMB(pdf.pdf_size)}</span>
           <span>{formatDate(pdf.uploaded_at)}</span>
-          <span className="download" onClick={() => downloadPDF(pdf.id)}>Download</span>
+          <span className="download" onClick={() => downloadPDF(pdf.id, pdf.pdf_name)}>Download</span>
         </div>
 
       ))}

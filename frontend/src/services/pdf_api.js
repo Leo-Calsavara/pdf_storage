@@ -89,3 +89,25 @@ export async function linkPDFTag(pdfId, tagId) {
         alert("Erro ao vincular tag: " + error.message);
     }
 }
+
+export async function downloadPDF(pdfId, pdfName) {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`http://localhost:3000/api/pdf/download?pdfId=${pdfId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const blob = await res.blob();
+
+    const url = window.URL.createObjectURL(blob);
+    console.log(pdfName);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = pdfName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
