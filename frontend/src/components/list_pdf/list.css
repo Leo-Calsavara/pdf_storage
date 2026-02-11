@@ -16,8 +16,17 @@
   text-align: center;
 }
 
+.pdf-row .tags-cell {
+  max-width: 80%;
+  cursor: pointer;
+}
+
 .pdf-row .name {
   text-align: left;
+}
+
+.pdf-row .download {
+  cursor: pointer;
 }
 
 .pdf-header {
@@ -42,4 +51,10 @@
   text-align: center;
   padding: 20px;
   color: whitesmoke;
+}
+
+.list_container{
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }

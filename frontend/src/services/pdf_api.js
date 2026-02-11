@@ -16,18 +16,17 @@ export async function uploadPDF(formData, token) {
 
 }
 
-export async function getPDFs(token) {
-    try {
-        const response = await fetch(`${URL}/list_pdfs`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-        return await response.json();
-    } catch (error) {
-        alert("Erro ao buscar PDFs: " + error.message);
-    }
+export async function createTag(token, name) {
+  const response = await fetch(`${URL}/create_tag`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ tag_name: name })
+  });
+
+  return await response.json();
 }
 
 export async function getTagsPdf(pdfId) {
@@ -45,28 +44,29 @@ export async function getTagsPdf(pdfId) {
     }   
 }
 
-
-export async function createTag(name) {
+export async function getPDFs(token) {
     try {
-        const response = await fetch(`${URL}/create_tag`, {
-            method: "POST",
+        console.log("Token:", token);
+        const response = await fetch(`${URL}/list_pdfs`, {
+            method: "GET",
             headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ tag_name: name })
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
         });
         return await response.json();
     } catch (error) {
-        alert("Erro ao criar tag: " + error.message);
+        alert("Erro ao buscar PDFs: " + error.message);
     }
 }
 
-export async function getAllTags() {
+
+export async function getAllTags(token) {
     try {
         const response = await fetch(`${URL}/list_tags`, {
             method: "GET",
             headers: {
-                "Content-Type": "application/json"
+                "Authorization": `Bearer ${token}`
             }
         });
         return await response.json();

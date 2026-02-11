@@ -1,5 +1,4 @@
 import { minioClient } from "../config/minio.js";
-import fs from 'fs';
 
 async function testeUpload() {
     try {
@@ -35,6 +34,36 @@ async function deleteBucket(bucketName) {
   console.log('Bucket removido');
 }
 
+import fs from 'fs';
+import path from 'path';
 
+const testDownload = async () => {
+    try {
+        const stream = await minioClient.getObject('1-leo', 'Banner_LeonardoCalsavara.pdf');
+        console.log('', stream.readable); // Verifica se o stream é legível
+        
+        // Define onde salvar
+        const downloadPath = path.join(process.cwd(), 'downloaded-file.pdf');
+        
+        // Cria um stream de escrita
+        const fileStream = fs.createWriteStream(downloadPath);
+        
+        // Pipe do MinIO direto para o arquivo
+        stream.pipe(fileStream);
+        
+        fileStream.on('finish', () => {
+            console.log('✓ Arquivo baixado com sucesso em:', downloadPath);
+        });
+        
+        fileStream.on('error', (err) => {
+            console.error('✗ Erro ao salvar arquivo:', err.message);
+        });
+        
+    } catch (error) {
+        console.error('✗ Erro:', error.message);
+    }
+};
+
+testDownload();
 //testeUpload();
 //deleteBucket('storepdf');

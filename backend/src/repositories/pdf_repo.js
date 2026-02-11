@@ -52,6 +52,14 @@ class PDFRepository {
         );
         return {tags};
     }
+
+    static async findById(pdfId, userId) {
+        const [rows] = await db.query(
+            'SELECT id, pdf_name FROM pdf_files WHERE id = ? AND user_id = ?',
+            [pdfId, userId]
+        );
+        return rows[0];
+    }
 }
 
 export default PDFRepository;

@@ -42,3 +42,23 @@ export async function getPDFTags(req, res) {
         return res.status(err.status || 500).json({ error: err.message });
     }
 }
+
+export async function downloadPDF(req, res) {
+  try {
+    const user = req.user;
+    const { pdfId } = req.query;
+
+    if (!pdfId) {
+      return res.status(400).json({ error: "pdfId não informado" });
+    }
+
+    const file = await PDFService.getFileForDownload(user, pdfId);
+
+    res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);
+    res.setHeader("Content-Type", "application/pdf");
+
+    file.stream.pipe(res);
+  } catch (err) {
+    res.status(err.status || 500).json({ error: err.message });
+  }
+}

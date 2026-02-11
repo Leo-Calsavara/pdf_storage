@@ -1,4 +1,4 @@
-/*import { Client } from 'minio';
+import { Client } from 'minio';
 
 const minioClient = new Client({
   endPoint: process.env.MINIO_ENDPOINT,
@@ -8,9 +8,9 @@ const minioClient = new Client({
   secretKey: process.env.MINIO_SECRET_KEY,
 });
 
-export { minioClient };*/
+export { minioClient };
 
-import {Client} from 'minio'; 
+/*import {Client} from 'minio'; 
 
 const minioClient = new Client({ 
     endPoint: 'localhost', 
@@ -20,4 +20,4 @@ const minioClient = new Client({
     secretKey: 'minioadmin', 
 }); 
     
-export {minioClient};
+export {minioClient};*/

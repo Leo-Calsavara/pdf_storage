@@ -1,4 +1,5 @@
 import PDFRepository from "../repositories/pdf_repo.js";
+import { minioClient } from "../config/minio.js";
 import jwt from 'jsonwebtoken';
 
 class PDFService {
@@ -30,6 +31,24 @@ class PDFService {
     static async getPDFTags(pdf_id) {
         const tags = await PDFRepository.get_pdf_tags(pdf_id);
         return tags;
+    }
+
+    static async getFileForDownload(user, pdfId) {
+        const pdf = await PDFRepository.findById(pdfId, user.id);
+        if (!pdf) {
+            const err = new Error("PDF não encontrado");
+            err.status = 404;
+            throw err;
+        }
+        
+        const bucketName = `${user.id}-${user.name.toLowerCase().trim().replace(/\s+/g, '')}`;
+
+        const stream = await minioClient.getObject(bucketName, pdf.pdf_name);
+
+        return {
+            name: pdf.pdf_name,
+            stream
+        };
     }
 }
 

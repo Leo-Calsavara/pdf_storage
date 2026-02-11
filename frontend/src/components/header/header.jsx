@@ -16,9 +16,9 @@ const Header = () => {
                 <div className="header_logo">
                     <Link to="/dashboard">PDF Manager</Link>
                 </div>
-                <nav className="header_nav">
+                <div className="header_nav">
                     <Link to="/dashboard/upload" className="nav_link">Upload de PDF</Link>
-                </nav>
+                </div>
                 <div className="logout">
                     <button className="logout_button" onClick={handleLogout}>Logout</button>
                 </div>

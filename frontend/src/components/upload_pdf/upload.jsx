@@ -12,7 +12,7 @@ const Upload = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getAllTags().then(data => {
+        getAllTags(localStorage.getItem("token")).then(data => {
             setTags(data.tags || data);
         });
     }, []);
@@ -28,7 +28,7 @@ const Upload = () => {
     const handleCreateTag = async () => {
        if (!newTag) return;
 
-        const created = await createTag(newTag);
+        const created = await createTag(localStorage.getItem("token"), newTag);
         setTags(prev => [...prev, created]);
         setNewTag("");
     };
@@ -42,9 +42,7 @@ const Upload = () => {
 
         const uploadResult = await uploadPDF(formData, localStorage.getItem("token"));
 
-        console.log("Selected file:", uploadResult.pdf);
         const pdfId = uploadResult.pdf;
-        console.log("PDF ID:", pdfId);
 
         for (const tagId of selectedTags) {
             console.log("Linking PDF ID", pdfId, "with Tag ID", tagId);
@@ -59,39 +57,48 @@ const Upload = () => {
     };
 
     return (
-        
-        <div className="Upload">
-            <Header />
-            <input type="file" accept=".pdf" onChange={e => setFile(e.target.files[0])} />
+    <div className="upload-page">
+      <Header />
 
-            <h3>Tags</h3>
+      <div className="upload-card">
+        <h2>Upload de PDF</h2>
 
-            <div className="tags-list">
-            {tags.map(tag => (
-                <label key={tag.id}>
-                <input
-                    type="checkbox"
-                    checked={selectedTags.includes(tag.id)}
-                    onChange={() => toggleTag(tag.id)}
-                />
-                {tag.name}
-                </label>
-            ))}
-            </div>
-
-            <div className="new-tag">
-            <input
-                value={newTag}
-                onChange={e => setNewTag(e.target.value)}
-                placeholder="Nova tag"
-            />
-            <button onClick={handleCreateTag}>+</button>
-            </div>
-
-            <button onClick={handleUpload}>Upload</button>
-
+        <div className="field">
+          <label>Arquivo PDF</label>
+          <input type="file" accept=".pdf" onChange={e => setFile(e.target.files[0])} />
         </div>
-    )
+
+        <div className="field">
+          <label>Tags</label>
+          <div className="tags-list">
+            {tags.map(tag => (
+              <label key={tag.id} className="tag-item">
+                <input
+                  type="checkbox"
+                  checked={selectedTags.includes(tag.id)}
+                  onChange={() => toggleTag(tag.id)}
+                />
+                <span>{tag.name}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="new-tag">
+          <input
+            value={newTag}
+            onChange={e => setNewTag(e.target.value)}
+            placeholder="Nova tag"
+          />
+          <button onClick={handleCreateTag}>+</button>
+        </div>
+
+        <button className="upload-btn" onClick={handleUpload}>
+          Enviar PDF
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Upload;

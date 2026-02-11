@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 export async function AuthMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
-    if (!authHeader) return res.status(401).json({ error: 'Token não enviado' });
+    if (!authHeader) return res.status(401).json({ error: 'Token não enviado', }, {} );
     
     const [, token] = authHeader.split(' ');
 
