@@ -44,6 +44,11 @@ Durante a criação dos dados no Minio, optei por realizar o seguinte processo, 
 
 O projeto ele deve ser executado com o seguinte comando `docker compose up -d --build`, onde o -d é utilizado para livrar o terminal dos log's dos containers e --build é utilizado para ler o Dockerfile tanto da pasta Frontend quando da pasta Backend.
 
+FrontEnd: http://localhost:5173
+Backend: http://localhost:3000
+Minio: http://localhost:9001
+Mariadb: http://localhost:3306
+
 ## Aprendizado e próximos passos
 
 Definitivamente esse projeto me ensinou muito a respeito do desenvolvimento fullstack, tenho mais facilidade para o ambiente de Backend então construir todo o front e tentar deixá-lo intuitivo ao mesmo tempo que visivelmente agradável foi um desafio, além de todos os erros que eu tive ao longo do projeto que me fizeram olhar com ainda mais cuidado para algumas questões, por exemplo se eu sempre estou importando as funções que criei. 
